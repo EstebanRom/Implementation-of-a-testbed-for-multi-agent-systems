@@ -1,0 +1,12 @@
+Ros2
+
+cd ~/ros2_ws
+colcon build
+source install/setup.bash
+
+Gazebo
+
+gazebo --verbose World.sdf 
+ros2 topic pub /cmd_vel_Robot0 geometry_msgs/Twist '{linear: {x: 1, y: 0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.0}}'
+
+ros2 launch World Launch.py

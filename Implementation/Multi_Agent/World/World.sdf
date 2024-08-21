@@ -1,0 +1,623 @@
+<sdf version='1.7'>
+  <world name='default'>
+    <light name='sun' type='directional'>
+      <cast_shadows>1</cast_shadows>
+      <pose>0 0 10 0 -0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.1 -0.9</direction>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+
+    <model name='ground_plane'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <surface>
+            <contact>
+              <collide_bitmask>65535</collide_bitmask>
+            </contact>
+            <friction>
+              <ode>
+                <mu>100</mu>
+                <mu2>50</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    
+<!-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+    <model name='Robot0'>
+      <pose>0 0 0 0 0 0</pose>
+      <link name='Chassis0'>
+        <pose>0 0 0.1 1.5708 0 1.5708</pose>
+        <inertial>
+          <mass>4.0</mass>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.65 0.3 0.2</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <collide_bitmask>65535</collide_bitmask>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <pose>0 -0.15 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>./Robot0.stl</uri>
+              <scale>3 3 3</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+      <link name='Left_Wheel_0'>
+        <pose>0.08 0.23 0 1.5708 0 0</pose>
+        <inertial>
+          <mass>4.0</mass>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.1</radius>
+              <length>0.05</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <contact>
+              <collide_bitmask>65535</collide_bitmask>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <cylinder>
+              <radius>0.1</radius>
+              <length>0.05</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+      <link name='Right_Wheel_0'>
+        <pose>0.08 -0.23 0 1.5708 0 0</pose>
+        <inertial>
+          <mass>4.0</mass>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.1</radius>
+              <length>0.05</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <contact>
+              <collide_bitmask>65535</collide_bitmask>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <cylinder>
+              <radius>0.1</radius>
+              <length>0.05</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+      <link name='Caster_Wheel_0'>
+        <pose>-0.15 0 -0.04 0 0 0</pose>
+        <inertial>
+          <mass>4.0</mass>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <sphere>
+              <radius>0.06</radius>
+            </sphere>
+          </geometry>
+          <surface>
+            <contact>
+              <collide_bitmask>65535</collide_bitmask>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <sphere>
+              <radius>0.06</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+      <joint name='Left_Wheel_0_joint' type='revolute'>
+        <parent>Chassis0</parent>
+        <child>Left_Wheel_0</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+          </limit>
+        </axis>
+      </joint>
+      <joint name='Right_Wheel_0_joint' type='revolute'>
+        <parent>Chassis0</parent>
+        <child>Right_Wheel_0</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+          </limit>
+        </axis>
+      </joint>
+      <joint name='Caster_Wheel_0_joint' type='ball'>
+        <parent>Chassis0</parent>
+        <child>Caster_Wheel_0</child>
+      </joint>
+      <plugin filename="libgazebo_ros_diff_drive.so" name="gazebo_ros_diff_drive_Robot0">
+        <ros>
+          <namespace>/</namespace>
+          <remapping>cmd_vel:=/cmd_vel_Robot0</remapping>
+        </ros>
+        <left_joint>Left_Wheel_0_joint</left_joint>
+        <right_joint>Right_Wheel_0_joint</right_joint>
+        <wheel_separation>0.4</wheel_separation>
+        <wheel_diameter>0.1</wheel_diameter>
+        <torque>5.0</torque>
+      </plugin>
+      <plugin name="gazebo_ros_p0d" filename="libgazebo_ros_p3d.so">
+        <ros>
+          <namespace>/</namespace>
+          <remapping>odom:=/odom_Robot0</remapping>
+        </ros>
+        <body_name>Chassis0</body_name>
+        <frame_name>world</frame_name>
+        <update_rate>10.0</update_rate>
+        <gaussian_noise>0.01</gaussian_noise>
+      </plugin>
+    </model>
+    
+<!-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+    <model name='Robot1'>
+      <pose>0 3 0 0 0 0</pose>
+      <link name='Chassis1'>
+        <pose>0 0 0.1 1.5708 0 1.5708</pose>
+        <inertial>
+          <mass>4.0</mass>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.65 0.3 0.2</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <collide_bitmask>65535</collide_bitmask>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <pose>0 -0.15 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>./Robot1.stl</uri>
+              <scale>3 3 3</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Red</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+      <link name='Left_Wheel_1'>
+        <pose>0.08 0.23 0 1.5708 0 0</pose>
+        <inertial>
+          <mass>4.0</mass>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.1</radius>
+              <length>0.05</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <contact>
+              <collide_bitmask>65535</collide_bitmask>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <cylinder>
+              <radius>0.1</radius>
+              <length>0.05</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Red</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+      <link name='Right_Wheel_1'>
+        <pose>0.08 -0.23 0 1.5708 0 0</pose>
+        <inertial>
+          <mass>4.0</mass>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.1</radius>
+              <length>0.05</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <contact>
+              <collide_bitmask>65535</collide_bitmask>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <cylinder>
+              <radius>0.1</radius>
+              <length>0.05</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Red</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+      <link name='Caster_Wheel_1'>
+        <pose>-0.15 0 -0.04 0 0 0</pose>
+        <inertial>
+          <mass>4.0</mass>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <sphere>
+              <radius>0.06</radius>
+            </sphere>
+          </geometry>
+          <surface>
+            <contact>
+              <collide_bitmask>65535</collide_bitmask>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <sphere>
+              <radius>0.06</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Red</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+      <joint name='Left_Wheel_1_joint' type='revolute'>
+        <parent>Chassis1</parent>
+        <child>Left_Wheel_1</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+          </limit>
+        </axis>
+      </joint>
+      <joint name='Right_Wheel_1_joint' type='revolute'>
+        <parent>Chassis1</parent>
+        <child>Right_Wheel_1</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+          </limit>
+        </axis>
+      </joint>
+      <joint name='Caster_Wheel_1_joint' type='ball'>
+        <parent>Chassis1</parent>
+        <child>Caster_Wheel_1</child>
+      </joint>
+      <plugin filename="libgazebo_ros_diff_drive.so" name="gazebo_ros_diff_drive_Robot1">
+        <ros>
+          <namespace>/</namespace>
+          <remapping>cmd_vel:=/cmd_vel_Robot1</remapping>
+        </ros>
+        <left_joint>Left_Wheel_1_joint</left_joint>
+        <right_joint>Right_Wheel_1_joint</right_joint>
+        <wheel_separation>0.4</wheel_separation>
+        <wheel_diameter>0.1</wheel_diameter>
+        <torque>5.0</torque>
+      </plugin>
+      <plugin name="gazebo_ros_p1d" filename="libgazebo_ros_p3d.so">
+        <ros>
+          <namespace>/</namespace>
+          <remapping>odom:=/odom_Robot1</remapping>
+        </ros>
+        <body_name>Chassis1</body_name>
+        <frame_name>world</frame_name>
+        <update_rate>10.0</update_rate>
+        <gaussian_noise>0.01</gaussian_noise>
+      </plugin>
+    </model>
+
+<!-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+    <model name='Robot2'>
+      <pose>0 -3 0 0 0 0</pose>
+      <link name='Chassis2'>
+        <pose>0 0 0.1 1.5708 0 1.5708</pose>
+        <inertial>
+          <mass>4.0</mass>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.65 0.3 0.2</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <collide_bitmask>65535</collide_bitmask>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <pose>0 -0.15 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>./Robot2.stl</uri>
+              <scale>3 3 3</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Blue</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+      <link name='Left_Wheel_2'>
+        <pose>0.08 0.23 0 1.5708 0 0</pose>
+        <inertial>
+          <mass>4.0</mass>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.1</radius>
+              <length>0.05</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <contact>
+              <collide_bitmask>65535</collide_bitmask>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <cylinder>
+              <radius>0.1</radius>
+              <length>0.05</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Blue</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+      <link name='Right_Wheel_2'>
+        <pose>0.08 -0.23 0 1.5708 0 0</pose>
+        <inertial>
+          <mass>4.0</mass>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.1</radius>
+              <length>0.05</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <contact>
+              <collide_bitmask>65535</collide_bitmask>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <cylinder>
+              <radius>0.1</radius>
+              <length>0.05</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Blue</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+      <link name='Caster_Wheel_2'>
+        <pose>-0.15 0 -0.04 0 0 0</pose>
+        <inertial>
+          <mass>4.0</mass>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <sphere>
+              <radius>0.06</radius>
+            </sphere>
+          </geometry>
+          <surface>
+            <contact>
+              <collide_bitmask>65535</collide_bitmask>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <sphere>
+              <radius>0.06</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Blue</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+      <joint name='Left_Wheel_2_joint' type='revolute'>
+        <parent>Chassis2</parent>
+        <child>Left_Wheel_2</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+          </limit>
+        </axis>
+      </joint>
+      <joint name='Right_Wheel_2_joint' type='revolute'>
+        <parent>Chassis2</parent>
+        <child>Right_Wheel_2</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1.79769e+308</lower>
+            <upper>1.79769e+308</upper>
+          </limit>
+        </axis>
+      </joint>
+      <joint name='Caster_Wheel_2_joint' type='ball'>
+        <parent>Chassis2</parent>
+        <child>Caster_Wheel_2</child>
+      </joint>
+      <plugin filename="libgazebo_ros_diff_drive.so" name="gazebo_ros_diff_drive_Robot2">
+        <ros>
+          <namespace>/</namespace>
+          <remapping>cmd_vel:=/cmd_vel_Robot2</remapping>
+        </ros>
+        <left_joint>Left_Wheel_2_joint</left_joint>
+        <right_joint>Right_Wheel_2_joint</right_joint>
+        <wheel_separation>0.4</wheel_separation>
+        <wheel_diameter>0.1</wheel_diameter>
+        <torque>5.0</torque>
+      </plugin>
+      <plugin name="gazebo_ros_p2d" filename="libgazebo_ros_p3d.so">
+        <ros>
+          <namespace>/</namespace>
+          <remapping>odom:=/odom_Robot2</remapping>
+        </ros>
+        <body_name>Chassis2</body_name>
+        <frame_name>world</frame_name>
+        <update_rate>10.0</update_rate>
+        <gaussian_noise>0.01</gaussian_noise>
+      </plugin>
+    </model>
+
+  </world>
+</sdf>
